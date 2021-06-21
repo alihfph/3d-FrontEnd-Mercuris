@@ -1,32 +1,24 @@
-import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
-import { Picker, Shoe } from './components'
+  
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './styles/styles.css'
+import { BrowserRouter, Route } from 'react-router-dom'
+import Register from './components/Register'
+import Login from './components/Login'
+import Profile from './components/Profile'
+import NavBar from './components/NavBar'
+import HomePage from './components/HomePage'
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Picker />
-      <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 4], fov: 50 }}>
-        <ambientLight intensity={0.3} />
-        <spotLight intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
-        <Suspense fallback={null}>
-          <Shoe />
-          <Environment preset="city" />
-          <ContactShadows 
-            rotation-x={Math.PI / 2} 
-            position={[0, -0.8, 0]} 
-            opacity={0.25} 
-            width={10} 
-            height={10} 
-            blur={1.5} 
-            far={0.8} 
-          />
-        </Suspense>
-        <OrbitControls />
-      </Canvas>
-    </>
-  );
+    <BrowserRouter>
+      <NavBar />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/register" exact component={Register} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/profile/me" exact component={Profile} />
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
