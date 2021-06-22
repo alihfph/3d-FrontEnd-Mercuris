@@ -46,7 +46,7 @@ const Register = ({history}) => {
 
   return (
     <Container>
-      <h1 className="text-center">Welcome to Demo Day App!</h1>
+      <h1 className="text-center">Welcome to 3D App!</h1>
       <h3 className="text-center">Create an account filling the form below</h3>
       <Row className="justify-content-center my-5">
         <Col className="d-flex flex-column justify-content-center align-items-center">

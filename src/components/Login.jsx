@@ -36,7 +36,7 @@ const Login = ({history}) => {
       if (response.ok) {
         setSuccessToast(true)
         localStorage.setItem("jwt", response.token);
-        localStorage.setItem("user", JSON.stringify(response.user));
+        // localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem('demoday_logged_in', 'true')
         setTimeout(() => {
           history.push('/profile/me')
@@ -52,7 +52,7 @@ const Login = ({history}) => {
 
   return (
     <Container>
-      <h1 className="text-center">Welcome to Demo Day App!</h1>
+      <h1 className="text-center">Welcome to 3D App!</h1>
       <h3 className="text-center">Login with your credentials</h3>
       <Row className="justify-content-center my-5">
         <Col className="d-flex flex-column justify-content-center align-items-center">

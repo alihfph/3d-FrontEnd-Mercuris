@@ -1,12 +1,14 @@
 import { RouteComponentProps } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { Canvas, useFrame } from 'react-three-fiber';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import StudentCard from './StudentCard'
+import threeDCard from './threeDCard'
+import * as THREE from 'three';
 
 const HomePage = (history, location, match ) => {
-  const [users, setUsers] = useState([])
+  const [data, setData] = useState([])
 
   useEffect(() => {
     const getUsers = async () => {
@@ -16,7 +18,7 @@ const HomePage = (history, location, match ) => {
         })
         if (response.ok) {
           let data = await response.json()
-          setUsers(data.users)
+          setData(data)
         } else {
           console.log('error')
         }
@@ -27,14 +29,34 @@ const HomePage = (history, location, match ) => {
     getUsers()
   }, [])
 
+  const Box = () => {
+    const ref = useRef();
+    useFrame((state) => {
+      // console.log(state);
+      if(ref.current !== undefined) {
+        ref.current.rotation.x = ref.current.rotation.y += 0.01;
+      }
+    });
+    return(
+      <mesh ref={ref}>
+          <boxBufferGeometry />
+          <meshBasicMaterial color="blue" />
+        </mesh>
+    );
+  }
+
   return (
     <Container style={{ marginTop: '100px' }}>
       <Row>
-        {users.map((user) => (
-          <Col key={user._id} lg={6} className={!user.profilePic ? 'd-none student-column' : 'student-column'}>
-            <StudentCard user={user} />
+      <Canvas style={{ background: 'black'}}>
+      <Box>
+      {data.map((data) => (
+          <Col key={data._id} lg={6} >
+            <threeDCard data={data} />
           </Col>
         ))}
+      </Box>
+    </Canvas>
       </Row>
     </Container>
   )
