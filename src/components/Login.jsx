@@ -35,6 +35,8 @@ const Login = ({history}) => {
       console.log(response)
       if (response.ok) {
         setSuccessToast(true)
+        localStorage.setItem("jwt", response.token);
+        localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem('demoday_logged_in', 'true')
         setTimeout(() => {
           history.push('/profile/me')
