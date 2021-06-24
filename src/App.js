@@ -1,24 +1,26 @@
-  
+import React, {useState} from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/styles.css'
-import { BrowserRouter, Route } from 'react-router-dom'
-import Register from './components/Register'
-import Login from './components/Login'
-import Profile from './components/Profile'
-import NavBar from './components/NavBar'
-import HomePage from './components/HomePage'
+import {Button } from 'react-bootstrap'
+import Waiting from "./components/Wating"
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <NavBar />
-      <Route path="/" exact component={HomePage} />
-      <Route path="/register" exact component={Register} />
-      <Route path="/login" exact component={Login} />
-      <Route path="/profile/me" exact component={Profile} />
-    </BrowserRouter>
-  )
-}
 
+
+const App = () =>   {
+  const [waiting, setWaiting] = useState()
+ setWaiting(Waiting)
+ debugger; 
+ const handlesubmit = () => (
+   setWaiting(!waiting)
+ )
+  return(
+    <>
+    
+    <Button className = "mx-5 my-5" onClick={{}}> Submit </Button>
+    {waiting && <Waiting />}
+    </>
+  
+)
+  }
 export default App
